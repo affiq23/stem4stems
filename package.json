@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/fiber": "^8.15.15",
     "next": "14.1.0",
-    "react": "^18",
-    "three": "^0.160.1",
     "openai": "^4.26.0",
-    "react-dom": "^18"
+    "react": "^18",
+    "react-dom": "^18",
+    "three": "^0.160.1"
   },
   "devDependencies": {
     "@types/node": "^20",

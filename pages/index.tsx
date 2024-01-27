@@ -1,16 +1,11 @@
-// import stem_logo from "public/stem_logo.jpg";
+import stem_logo from "public/stem_logo.png";
 import React from "react";
 import Image from "next/image";
-import Quiz from "@/components/quiz";
-import Content from "./content";
-
-
 
 export default function Home() {
   return (
     <main>
-      {/* <Image src={stem_logo} alt="STEM logo" /> */}
-      <Quiz />
+      <Image src={stem_logo} alt="STEM logo" />
     </main>
   );
 }

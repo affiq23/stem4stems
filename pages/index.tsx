@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Quiz from "@/components/quiz";
+import Content from "./content";
 
 
 

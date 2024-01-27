@@ -1,21 +1,80 @@
-import stem_logo from "../public/stem_logo.png";
-import React from "react";
-import Image from "next/image";
-import { createRoot } from "react-dom/client";
-import { Canvas } from "@react-three/fiber";
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useEffect, useRef, useState } from "react";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import * as THREE from "three";
+
+function RotatingImage({ texture }: any) {
+  const mesh = useRef<THREE.Mesh | null>(null);
+
+  // Create a rotation animation for the image
+  useFrame(() => {
+    if (mesh.current) {
+      mesh.current.rotation.y += 0.02;
+    }
+  });
+
+  return (
+    <mesh ref={mesh}>
+      <circleGeometry args={[2.5, 32]} />
+      <meshBasicMaterial
+        attach="material"
+        map={texture}
+        side={THREE.DoubleSide}
+      />
+    </mesh>
+  );
+}
 
 export default function Home() {
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const textureLoader = new THREE.TextureLoader();
+      const loadedTexture = textureLoader.load("/stem_logo.png"); // Direct path
+      setTexture(loadedTexture);
+    }
+  }, []);
+
   return (
-    <main>
-      <div>
-        <Image
-          src={stem_logo}
-          alt="STEM logo"
-          className="rounded-full"
-          width={500}
-          height={1000}
-        />
-      </div>
-    </main>
+    <div className="flex min-h-screen bg-black text-white">
+      <aside className="w-60 bg-gray-800 p-5 ml-5 mt-5 mb-5 rounded-lg shadow-lg">
+        <div className="flex flex-col items-center">
+          <div className="w-52 h-52">
+            <Canvas>
+              <ambientLight />
+              <pointLight position={[10, 10, 10]} />
+              <RotatingImage texture={texture} />
+            </Canvas>
+          </div>
+
+          <h2 className="text-xl font-semibold my-5">The World of STEM</h2>
+          <nav className="flex flex-col gap-4">
+            <a href="#" className="hover:text-blue-400">
+              Home
+            </a>
+            <a href="#" className="hover:text-blue-400">
+              About STEM
+            </a>
+            <a href="#" className="hover:text-blue-400">
+              Activities
+            </a>
+            <a href="#" className="hover:text-blue-400">
+              Contact
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <main className="flex-grow">
+        <section className="text-center py-12">
+          <h1 className="text-5xl font-bold mb-6">Discover Science and Fun!</h1>
+          <p className="text-2xl mx-auto leading-relaxed max-w-2xl">
+            Explore amazing science facts, cool tech, engineering projects, and
+            fun math games!
+          </p>
+        </section>
+      </main>
+    </div>
   );
 }

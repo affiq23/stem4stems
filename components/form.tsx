@@ -111,8 +111,8 @@ export default function Form() {
         className="w-60 bg-gray-800 p-5 ml-5 mt-5 mb-5 rounded-lg shadow-lg"
         aria-label="Sidenav"
       >
-        <div className="overflow-y-hidden py-5 px-3 h-full border-r bg-gray-800 border-gray-700">
-          <div className="overflow-y-hidden w-52 h-52 -translate-x-7">
+        <div className="overflow-hidden py-5 px-3 h-full border-r bg-gray-800 border-gray-700">
+          <div className="overflow-hidden w-52 h-52 -translate-x-7">
             <Link href={"/"}>
               <Canvas>
                 <ambientLight />
@@ -218,7 +218,9 @@ export default function Form() {
 
         {generatedContent && (
           <div style={{ marginTop: "20px", textAlign: "center" }}>
-            <p className="text-lg font-semibold mb-5 ">{generatedContent.question}</p>
+            <p className="text-lg font-semibold mb-5 ">
+              {generatedContent.question}
+            </p>
             <form className="max-w-sm mx-auto">
               {Object.entries(generatedContent.answers).map(
                 ([optionKey, optionText]) => (

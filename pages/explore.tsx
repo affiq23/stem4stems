@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { AnaglyphEffect } from "three/examples/jsm/Addons.js";
 
 export default function Explore() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -45,23 +45,25 @@ export default function Explore() {
 
     const scene = new THREE.Scene();
 
-    // Load texture for the skybox
+    // Load textures
     const loader = new THREE.TextureLoader();
-    const textureCube = loader.load("/skybox.png"); // Ensure this path is correct
+    const textureCube = loader.load("/skybox.png"); // Replace with your texture path
+    const metalTexture = loader.load("/metal.png"); // Replace with your texture path
 
     // Set background
     scene.background = textureCube;
 
-    // Create highly reflective material
+    // Create reflective material
     const material = new THREE.MeshStandardMaterial({
       color: 0xffffff,
-      metalness: 1, // Fully metallic
-      roughness: 0.1, // Very smooth
       envMap: textureCube,
+      metalnessMap: metalTexture,
+      metalness: 0.9,
+      roughness: 0.0,
     });
 
     // Add lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff); // soft white light
     scene.add(ambientLight);
     const pointLight = new THREE.PointLight(0xffffff, 1, 100);
     pointLight.position.set(10, 10, 10);
@@ -83,18 +85,6 @@ export default function Explore() {
     renderer.setPixelRatio(window.devicePixelRatio);
     if (containerRef.current)
       containerRef.current.appendChild(renderer.domElement);
-
-    const pmremGenerator = new THREE.PMREMGenerator(renderer);
-    pmremGenerator.compileEquirectangularShader();
-
-    new RGBELoader()
-      .setDataType(THREE.UnsignedByteType)
-      .load("/path_to_your_hdr.hdr", function (texture) {
-        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-        scene.environment = envMap;
-        texture.dispose();
-        pmremGenerator.dispose();
-      });
 
     const effect = renderer;
     effect.setSize(window.innerWidth, window.innerHeight);

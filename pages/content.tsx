@@ -47,7 +47,7 @@ const Content = () => {
                   <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                   </span>
               </div>
-              <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white underline-h1"><a href="#">Technology</a></h1>
+              <h1 className="mb-2 text-4xl font-bold text-sky-300 underline-h1"><a href="#">Technology</a></h1>
               < br />
               <p className="mb-5 font-light text-gray-500 dark:text-gray-400">Technology is like magic that we create! It's all about using tools and machines to make our lives better. 
                 Kids can enjoy playing educational games on tablets or computers, learning problem-solving skills while having fun. 

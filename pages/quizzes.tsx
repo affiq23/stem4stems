@@ -1,11 +1,8 @@
+import Form from "@/components/form";
 import React from "react";
 
 const Quizzes = () => {
-  return 
-  <div>
-    <h1>Quizzes</h1>
-    <p>Quizzes will go here.</p>
-  </div>;
+  return Form();
 };
 
 export default Quizzes;

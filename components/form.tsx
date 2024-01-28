@@ -22,7 +22,7 @@ export default function Form() {
   };
 
   const handleUserAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserAnswer(e.target.value.toUpperCase()); // Convert the answer to uppercase for case-insensitive comparison
+    setUserAnswer(e.target.value.toUpperCase()); 
   };
 
   const openaikey = process.env.OPENAI_API_KEY;
@@ -53,8 +53,12 @@ export default function Form() {
       const generatedContent =
         response.choices[0]?.message?.content || null;
 
+
+      console.log(generatedContent);
+
       setGeneratedContent(JSON.parse(generatedContent as string) as GeneratedContent);
-      setIsAnswerCorrect(null); // Reset the answer correctness status
+      setIsAnswerCorrect(null); 
+      setUserAnswer(""); 
     } catch (error) {
       console.error("Error generating answer:", error);
     }
@@ -93,7 +97,7 @@ export default function Form() {
       {generatedContent && (
         <div style={{ marginTop: "20px" }}>
           <p>{generatedContent.question}</p>
-          <form>
+          <form style={{ marginTop: "10px" }}>
             {Object.entries(generatedContent.answers).map(
               ([optionKey, optionText]) => (
                 <div key={optionKey}>

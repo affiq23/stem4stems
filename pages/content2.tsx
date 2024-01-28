@@ -1,82 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from "react";
-import OpenAI from "openai";
 import dotenv from "dotenv";
 dotenv.config();
 
 export default function Content() {
-  const [scienceResponses, setScienceResponses] = useState<string[]>([]);
-  const [technologyResponses, setTechnologyResponses] = useState<string[]>([]);
-  const [engineeringResponses, setEngineeringResponses] = useState<string[]>(
-    []
-  );
-  const [mathResponses, setMathResponses] = useState<string[]>([]);
-
-  const generateOpenAIResponses = async (prompts: string[]) => {
-    try {
-      const openaikey = process.env.OPENAI_API_KEY;
-      const openai = new OpenAI({
-        apiKey: openaikey,
-        dangerouslyAllowBrowser: true,
-      });
-
-      const responses = await Promise.all(
-        prompts.map(async (prompt) => {
-          const completion = await openai.completions.create({
-            model: "gpt-3.5-turbo-1106",
-            messages: [
-              { role: "system", content: "You are a helpful assistant." },
-              { role: "user", content: prompt },
-            ],
-            max_tokens: 150,
-          });
-
-          return completion.choices[0]?.text || "";
-        })
-      );
-
-      return responses;
-    } catch (error) {
-      console.error("Error generating OpenAI responses:", error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    const sciencePrompts = [
-      "Tell me some fun facts about science that an eight year old could understand.",
-      // Add more prompts as needed
-    ];
-
-    const technologyPrompts = [
-      "Tell me some fun facts about technology suitable for kids.",
-      // Add more prompts as needed
-    ];
-
-    const engineeringPrompts = [
-      "Tell me some fun facts about engineering that kids would enjoy.",
-      // Add more prompts as needed
-    ];
-
-    const mathPrompts = [
-      "Tell me some fun math facts for kids.",
-      // Add more prompts as needed
-    ];
-
-    generateOpenAIResponses(sciencePrompts).then((responses) =>
-      setScienceResponses(responses)
-    );
-    generateOpenAIResponses(technologyPrompts).then((responses) =>
-      setTechnologyResponses(responses)
-    );
-    generateOpenAIResponses(engineeringPrompts).then((responses) =>
-      setEngineeringResponses(responses)
-    );
-    generateOpenAIResponses(mathPrompts).then((responses) =>
-      setMathResponses(responses)
-    );
-  }, []);
-
   return (
     <div>
       <div>

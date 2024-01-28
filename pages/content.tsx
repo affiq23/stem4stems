@@ -6,26 +6,26 @@ const Content = () => {
       <div>
       <div>
         <br />
-      <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-600 dark:border-gray-700">
               <div className="flex justify-between items-center mb-5 text-gray-500">
                   <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                   </span>
               </div>
-              <h1 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white underline-h1">
+              <h1 className="mb-2 text-4xl font-bold text-green-300 underline-h1">
                 <a href="#">Science</a>
               </h1>
               < br />
-              <p className="mb-5 text-font-light text-gray-500 dark:text-gray-400"> Science is like being a super curious explorer! It's about asking cool questions and doing fun experiments to find out how things work.</p>
-              <p className="mb-5 text-font-light text-gray-500 dark:text-gray-400"> Imagine you have a magical detective kit, and your mission is to uncover the secrets of the world.
+              <p className="mb-5 text-green-400"> Science is like being a super curious explorer! It's about asking cool questions and doing fun experiments to find out how things work.</p>
+              <p className="mb-5 text-font-light text-white-300"> Imagine you have a magical detective kit, and your mission is to uncover the secrets of the world.
                 You can do simple experiments, like making a volcano explode with baking soda and vinegar. It's not just messy fun – it helps you understand why things happen. Science turns everyday stuff into awesome discoveries!
                 Think of science as a treasure hunt for knowledge. You get to watch plants grow, make rainbows appear, and listen to the rain's music. It's like having a superpower to reveal the amazing wonders all around you.
                 So, put on your explorer hat and get ready for a journey of excitement. Science is your ticket to unraveling the mysteries of the world, and every experiment is a step closer to becoming a fantastic detective of the universe!</p>
             <br />
               <div className="flex justify-between items-center">
                  <div>
-                 <p className="mb-5 text-font-light text-gray-500 dark:text-gray-400"> 1. Did you know that bubbles always form into a sphere? It's like nature's way of making perfect little balls of soapy fun! You can create your bubble magic by mixing soap with water and blowing gently through a bubble wand.</p>
-                 <p className="mb-5 text-font-light text-gray-500 dark:text-gray-400"> 2. Some flowers change color when you put them in water! It's like they're telling us a secret. Kids can experiment by placing white flowers in different colored water and watch as the petals change hues, showing how plants drink water.</p>
-                 <p className="mb-5 text-font-light text-gray-500 dark:text-gray-400"> 3. Butterflies undergo an incredible transformation called metamorphosis. They start as caterpillars, form a cozy chrysalis, and then emerge as beautiful butterflies. It's like a magical makeover that happens in nature!</p>
+                 <p className="mb-5 text-font-light text-red-300"> 1. Did you know that bubbles always form into a sphere? It's like nature's way of making perfect little balls of soapy fun! You can create your bubble magic by mixing soap with water and blowing gently through a bubble wand.</p>
+                 <p className="mb-5 text-font-light text-yellow-300"> 2. Some flowers change color when you put them in water! It's like they're telling us a secret. Kids can experiment by placing white flowers in different colored water and watch as the petals change hues, showing how plants drink water.</p>
+                 <p className="mb-5 text-font-light text-sky-300"> 3. Butterflies undergo an incredible transformation called metamorphosis. They start as caterpillars, form a cozy chrysalis, and then emerge as beautiful butterflies. It's like a magical makeover that happens in nature!</p>
                 </div>
 
                   <a href="#" className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">

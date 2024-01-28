@@ -10,6 +10,8 @@ const config: Config = {
     extend: {
             animation: {
         text: 'text 1.5s ease-in-out infinite',
+        'spin-slow': 'spin 3s linear infinite',
+        wiggle: 'wiggle 1s ease-in-out infinite',
       },
       keyframes: {
         text: {
@@ -22,6 +24,13 @@ const config: Config = {
             'background-position': 'right center',
           },
         },
+        wiggle: {
+
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+
+          '50%': { transform: 'rotate(3deg)' },
+
+        }
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

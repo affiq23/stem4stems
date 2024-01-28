@@ -66,7 +66,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-black text-white">
+    <div className="flex min-h-screen bg-black text-white font-orbitron">
       <aside
         id="default-sidebar"
         className="w-60 bg-gray-800 p-5 ml-5 mt-5 mb-5 rounded-lg shadow-lg"
@@ -82,7 +82,9 @@ export default function Home() {
               </Canvas>
             </Link>
           </div>
-          <h2 className="text-xl font-semibold mx-4">STEM4stems</h2>
+          <h2 className="text-xl font-semibold mx-4 font-orbitron">
+            STEM4stems
+          </h2>
           <ul className="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
             <li>
               <Link
@@ -150,14 +152,14 @@ export default function Home() {
       <main className="flex-grow">
         <section className="text-center py-12">
           <span className="flex place-content-center pt-14 text-6xl font-bold text-transparent bg-clip-text ">
-            <h1 className="animate-text text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-teal-500 to-red-200">
+            <h1 className="animate-text text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-teal-500 to-red-200 mb-2 font-orbitron">
               Discover the fun of STEM!
             </h1>
           </span>
 
-          <p className="text-2xl mx-auto leading-relaxed max-w-2xl pt-2">
-            Explore amazing science facts, cool applications of technology,
-            beautiful engineering projects, and fun math games!
+          <p className="text-2xl mx-auto leading-relaxed max-w-2xl pt-2 pb-0 font-orbitron">
+            STEM4stems is your playground for endless learning and discovery
+            designed just for young explorers like you!
           </p>
         </section>
         <section className="w-full h-1/2 flex justify-center mx-auto">

@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+       fontFamily: {
+        'orbitron': ['Orbitron', 'sans-serif']
+      },
             animation: {
         text: 'text 1.5s ease-in-out infinite',
         'spin-slow': 'spin 3s linear infinite',

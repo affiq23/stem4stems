@@ -68,7 +68,12 @@ export default function Home() {
 
       <main className="flex-grow">
         <section className="text-center py-12">
-          <h1 className="text-5xl font-bold mb-6">Discover Science and Fun!</h1>
+          <span className="flex place-content-center pt-14 text-6xl font-bold text-transparent bg-clip-text ">
+            <h1 className="animate-text text-transparent bg-clip-text bg-gradient-to-r from-orange-200 via-teal-500 to-blue-200">
+              Discover the fun of STEM!
+            </h1>
+          </span>
+
           <p className="text-2xl mx-auto leading-relaxed max-w-2xl">
             Explore amazing science facts, cool tech, engineering projects, and
             fun math games!

@@ -45,8 +45,23 @@ const ThreeJSAnaglyphComponent: React.FC = () => {
 
     const scene = new THREE.Scene();
 
+    // Load textures
+    const loader = new THREE.TextureLoader();
+    const textureCube = loader.load("/skybox.png"); // Replace with your texture path
+    const metalTexture = loader.load("/metal.png"); // Replace with your texture path
+
+    // Set background
+    scene.background = textureCube;
+
+    // Create reflective material
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      envMap: textureCube,
+      metalness: 0.7,
+      roughness: 0.1,
+    });
+
     const geometry = new THREE.SphereGeometry(0.1, 32, 16);
-    const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
     for (let i = 0; i < 500; i++) {
       const mesh = new THREE.Mesh(geometry, material);
@@ -85,8 +100,8 @@ const ThreeJSAnaglyphComponent: React.FC = () => {
     };
 
     const render = () => {
-      camera.position.x += (mouseX.current - camera.position.x) * 0.05;
-      camera.position.y += (-mouseY.current - camera.position.y) * 0.05;
+      camera.position.x += (mouseX.current - camera.position.x) * 0.15;
+      camera.position.y += (-mouseY.current - camera.position.y) * 0.15;
       camera.lookAt(scene.position);
 
       for (let i = 0, il = spheres.current.length; i < il; i++) {

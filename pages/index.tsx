@@ -74,11 +74,13 @@ export default function Home() {
       >
         <div className="overflow-y-hidden py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
           <div className="overflow-y-hidden w-52 h-52 -translate-x-7">
-            <Canvas>
-              <ambientLight />
-              <pointLight position={[0, 0, 0]} />
-              <RotatingImage texture={texture} />
-            </Canvas>
+            <Link href={"/"}>
+              <Canvas>
+                <ambientLight />
+                <pointLight position={[0, 0, 0]} />
+                <RotatingImage texture={texture} />
+              </Canvas>
+            </Link>
           </div>
           <h2 className="text-xl font-semibold mx-4">STEM4stems</h2>
           <ul className="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">

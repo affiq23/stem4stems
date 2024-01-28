@@ -23,7 +23,9 @@ export default function Content() {
           { role: "system", content: "You are a helpful assistant." },
           {
             role: "user",
-            content: `Generate a very unique and educational fun fact about a STEM topic like ${topic} for children around the age of 10.`,
+            content: `Generate a very unique and educational fun fact about a STEM topic like ${topic} for children around the age of 10. 
+            Keep the output strictly just a response. For example, a sample response could be "Did you know that the first computer mouse was made of wood? It was invented by Doug Engelbart in 1964, and it was called a 'mouse' because of its tail-like cable. This early mouse had just one button and was used to control a computer screen. 
+            Today's computer mice are much more advanced and come in all shapes and sizes!" `,
           },
           { role: "assistant", content: "json" }, // Ensure the word 'json' is present
         ],
@@ -72,14 +74,15 @@ export default function Content() {
             Explore Science!
           </button>
         </div>
-        {/* Render Fun Fact */}
+      </div>
+
+      {/* Render Fun Fact */}
       {funFacts.Science && (
-        <div className="mt-8 bg-blue-900 p-6 rounded-lg">
+        <div className="mt-8 ml-36 bg-blue-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
           <p className="mb-4 text-blue-300 text-center">{funFacts.Science}</p>
         </div>
       )}
-      </div>
 
       <br />
       {/* Technology Section */}
@@ -102,14 +105,14 @@ export default function Content() {
             className="text-red-400 hover:text-red-200"
             onClick={() => handleExploreClick("Technology")}
           >
-            Explore Technology!
+            Click !
           </button>
         </div>
       </div>
 
       {/* Render Fun Fact */}
       {funFacts.Technology && (
-        <div className="mt-8 bg-red-900 p-6 rounded-lg">
+        <div className="mt-8 ml-36 bg-red-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
           <p className="mb-4 text-red-100 text-center">{funFacts.Technology}</p>
         </div>
@@ -121,7 +124,7 @@ export default function Content() {
         <div className="w-0 h-0 
         border-l-[55px] border-l-transparent
         border-b-[80px] border-b-green-500
-        border-r-[55px] border-r-transparent animate-bounce mr-11 mb-4 md:mb-0"></div>
+        border-r-[55px] border-r-transparent animate-bounce mr-11 mb-4 md:mb-0 "></div>
         <div>
           <h2 className="text-4xl font-bold mb-3">
             Engineering: Building the Future
@@ -139,14 +142,14 @@ export default function Content() {
             className="text-green-400 hover:text-green-200"
             onClick={() => handleExploreClick("Engineering")}
           >
-            Explore Engineering!
+            Click for some fun facts!
           </button>
         </div>
       </div>
 
       {/* Render Fun Fact */}
       {funFacts.Engineering && (
-        <div className="mt-8 bg-green-900 p-6 rounded-lg">
+        <div className="mt-8 ml-36 bg-green-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
           <p className="mb-4 text-green-100 text-center">{funFacts.Engineering}</p>
         </div>
@@ -183,7 +186,7 @@ export default function Content() {
 
       {/* Render Fun Fact */}
       {funFacts.Math && (
-        <div className="mt-8 bg-yellow-700 p-6 rounded-lg">
+        <div className="mt-8 ml-36 bg-yellow-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
           <p className="mb-4 text-yellow-100 text-center">{funFacts.Math}</p>
         </div>

@@ -10,6 +10,7 @@ export default function Form() {
   const handleTopicChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedTopic(e.target.value);
   };
+  
   const openaikey = process.env.OPENAI_API_KEY;
   console.log(openaikey);
   const openai = new OpenAI({

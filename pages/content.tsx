@@ -1,11 +1,71 @@
-import React from "react";
-
-
-
-
-
+import React, { useState, useEffect } from "react";
+import OpenAI from "openai";
+import dotenv from "dotenv";
+dotenv.config();
 
 const Content = () => {
+    const [scienceResponses, setScienceResponses] = useState<string[]>([]);
+    const [technologyResponses, setTechnologyResponses] = useState<string[]>([]);
+    const [engineeringResponses, setEngineeringResponses] = useState<string[]>([]);
+    const [mathResponses, setMathResponses] = useState<string[]>([]);
+  
+    const generateOpenAIResponses = async (prompts: string[]) => {
+      try {
+        const openaikey = process.env.OPENAI_API_KEY;
+        const openai = new OpenAI({
+          apiKey: openaikey,
+          dangerouslyAllowBrowser: true,
+        });
+  
+        const responses = await Promise.all(
+          prompts.map(async (prompt) => {
+            const completion = await openai.completions.create({
+                model: "gpt-3.5-turbo-1106",
+                messages: [
+                    { role: 'system', content: 'You are a helpful assistant.' },
+                    { role: 'user', content: prompt },
+                ],
+                max_tokens: 150,
+            });
+  
+            return completion.choices[0]?.text || "";
+          })
+        );
+  
+        return responses;
+      } catch (error) {
+        console.error("Error generating OpenAI responses:", error);
+        throw error;
+      }
+    };
+  
+    useEffect(() => {
+      const sciencePrompts = [
+        "Tell me some fun facts about science that an eight year old could understand.",
+        // Add more prompts as needed
+      ];
+  
+      const technologyPrompts = [
+        "Tell me some fun facts about technology suitable for kids.",
+        // Add more prompts as needed
+      ];
+  
+      const engineeringPrompts = [
+        "Tell me some fun facts about engineering that kids would enjoy.",
+        // Add more prompts as needed
+      ];
+  
+      const mathPrompts = [
+        "Tell me some fun math facts for kids.",
+        // Add more prompts as needed
+      ];
+  
+      generateOpenAIResponses(sciencePrompts).then((responses) => setScienceResponses(responses));
+      generateOpenAIResponses(technologyPrompts).then((responses) => setTechnologyResponses(responses));
+      generateOpenAIResponses(engineeringPrompts).then((responses) => setEngineeringResponses(responses));
+      generateOpenAIResponses(mathPrompts).then((responses) => setMathResponses(responses));
+    }, []);
+
   return (
     <div>
       <div>
@@ -29,7 +89,7 @@ const Content = () => {
               <div className="flex justify-between items-center">
                  <div>
                 
-                 <p className="mb-5 text-font-light text-red-300"> 1. Did you know that bubbles always form into a sphere? It's like nature's way of making perfect little balls of soapy fun! You can create your bubble magic by mixing soap with water and blowing gently through a bubble wand.</p>
+                 <p className="mb-5 text-font-light text-red-300">{scienceResponses[0]}</p>
                  <p className="mb-5 text-font-light text-yellow-300"> 2. Some flowers change color when you put them in water! It's like they're telling us a secret. Kids can experiment by placing white flowers in different colored water and watch as the petals change hues, showing how plants drink water.</p>
                  <p className="mb-5 text-font-light text-sky-300"> 3. Butterflies undergo an incredible transformation called metamorphosis. They start as caterpillars, form a cozy chrysalis, and then emerge as beautiful butterflies. It's like a magical makeover that happens in nature!</p>
                 </div>

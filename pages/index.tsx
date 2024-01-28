@@ -16,7 +16,7 @@ function RotatingImage({ texture }: any) {
 
   return (
     <mesh ref={mesh}>
-      <circleGeometry args={[2.5, 32]} />
+      <circleGeometry args={[2.5, 60]} />
       <meshBasicMaterial
         attach="material"
         map={texture}
@@ -69,7 +69,7 @@ export default function Home() {
       <main className="flex-grow">
         <section className="text-center py-12">
           <span className="flex place-content-center pt-14 text-6xl font-bold text-transparent bg-clip-text ">
-            <h1 className="animate-text text-transparent bg-clip-text bg-gradient-to-r from-orange-200 via-teal-500 to-blue-200">
+            <h1 className="animate-text text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-teal-500 to-red-200">
               Discover the fun of STEM!
             </h1>
           </span>

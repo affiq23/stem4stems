@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import OpenAI from "openai";
-// import dotenv from 'dotenv';
-// dotenv.config();
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Form() {
   const [selectedTopic, setSelectedTopic] = useState("");
@@ -11,6 +11,7 @@ export default function Form() {
     setSelectedTopic(e.target.value);
   };
   const openaikey = process.env.OPENAI_API_KEY;
+  console.log(openaikey);
   const openai = new OpenAI({
     apiKey: openaikey,
     dangerouslyAllowBrowser: true,

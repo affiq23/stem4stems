@@ -45,14 +45,14 @@ export default function Home() {
         aria-label="Sidenav"
       >
         <div className="overflow-y-hidden py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-          <div className="w-52 h-52 -translate-x-8">
+          <div className="overflow-y-hidden w-52 h-52 -translate-x-7">
             <Canvas>
               <ambientLight />
-              <pointLight position={[10, 10, 10]} />
+              <pointLight position={[0, 0, 0]} />
               <RotatingImage texture={texture} />
             </Canvas>
           </div>
-          <h2 className="text-xl font-semibold mx-3">STEM4stems</h2>
+          <h2 className="text-xl font-semibold mx-4">STEM4stems</h2>
           <ul className="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
             <li>
               <a
@@ -73,7 +73,7 @@ export default function Home() {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span className="ml-3">Docs</span>
+                <span className="ml-3">STEM Success</span>
               </a>
             </li>
             <li>
@@ -90,7 +90,7 @@ export default function Home() {
                 >
                   <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
                 </svg>
-                <span className="ml-3">Components</span>
+                <span className="ml-3">Practice!</span>
               </a>
             </li>
             <li>
@@ -111,7 +111,7 @@ export default function Home() {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span className="ml-3">Help</span>
+                <span className="ml-3">Explore STEM</span>
               </a>
             </li>
           </ul>
@@ -125,10 +125,13 @@ export default function Home() {
             </h1>
           </span>
 
-          <p className="text-2xl mx-auto leading-relaxed max-w-2xl">
-            Explore amazing science facts, cool tech, engineering projects, and
-            fun math games!
+          <p className="text-2xl mx-auto leading-relaxed max-w-2xl pt-2">
+            Explore amazing science facts, cool applications of technology,
+            beautiful engineering projects, and fun math games!
           </p>
+        </section>
+        <section className="w-5/6 h-2/3 bg-red-200 ">
+          
         </section>
       </main>
     </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { AnaglyphEffect } from "three/examples/jsm/Addons.js";
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 
-const ThreeJSAnaglyphComponent: React.FC = () => {
+export default function Explore() {
   const containerRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>();
   const spheres = useRef<THREE.Mesh[]>([]);
@@ -45,21 +45,27 @@ const ThreeJSAnaglyphComponent: React.FC = () => {
 
     const scene = new THREE.Scene();
 
-    // Load textures
+    // Load texture for the skybox
     const loader = new THREE.TextureLoader();
-    const textureCube = loader.load("/skybox.png"); // Replace with your texture path
-    const metalTexture = loader.load("/metal.png"); // Replace with your texture path
+    const textureCube = loader.load("/skybox.png"); // Ensure this path is correct
 
     // Set background
     scene.background = textureCube;
 
-    // Create reflective material
+    // Create highly reflective material
     const material = new THREE.MeshStandardMaterial({
       color: 0xffffff,
+      metalness: 1, // Fully metallic
+      roughness: 0.1, // Very smooth
       envMap: textureCube,
-      metalness: 0.7,
-      roughness: 0.1,
     });
+
+    // Add lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
+    const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+    pointLight.position.set(10, 10, 10);
+    scene.add(pointLight);
 
     const geometry = new THREE.SphereGeometry(0.1, 32, 16);
 
@@ -78,7 +84,19 @@ const ThreeJSAnaglyphComponent: React.FC = () => {
     if (containerRef.current)
       containerRef.current.appendChild(renderer.domElement);
 
-    const effect = new AnaglyphEffect(renderer);
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+
+    new RGBELoader()
+      .setDataType(THREE.UnsignedByteType)
+      .load("/path_to_your_hdr.hdr", function (texture) {
+        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+        scene.environment = envMap;
+        texture.dispose();
+        pmremGenerator.dispose();
+      });
+
+    const effect = renderer;
     effect.setSize(window.innerWidth, window.innerHeight);
 
     const onWindowResize = () => {
@@ -128,6 +146,4 @@ const ThreeJSAnaglyphComponent: React.FC = () => {
   }, [isIntersecting]);
 
   return <div ref={containerRef} style={{ height: "500px", width: "100%" }} />;
-};
-
-export default ThreeJSAnaglyphComponent;
+}

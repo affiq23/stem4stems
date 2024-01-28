@@ -218,7 +218,7 @@ export default function Form() {
 
         {generatedContent && (
           <div style={{ marginTop: "20px", textAlign: "center" }}>
-            <p>{generatedContent.question}</p>
+            <p className="text-lg font-semibold mb-5 ">{generatedContent.question}</p>
             <form className="max-w-sm mx-auto">
               {Object.entries(generatedContent.answers).map(
                 ([optionKey, optionText]) => (

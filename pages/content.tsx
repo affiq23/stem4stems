@@ -23,7 +23,7 @@ export default function Content() {
           { role: "system", content: "You are a helpful assistant." },
           {
             role: "user",
-            content: `Generate a very unique and educational fun fact about ${topic} for children around the age of 10.`,
+            content: `Generate a very unique and educational fun fact about a STEM topic like ${topic} for children around the age of 10.`,
           },
           { role: "assistant", content: "json" }, // Ensure the word 'json' is present
         ],
@@ -72,20 +72,19 @@ export default function Content() {
             Explore Science!
           </button>
         </div>
-      </div>
-
-      {/* Render Fun Fact */}
+        {/* Render Fun Fact */}
       {funFacts.Science && (
         <div className="mt-8 bg-blue-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-blue-300">{funFacts.Science}</p>
+          <p className="mb-4 text-blue-300 text-center">{funFacts.Science}</p>
         </div>
       )}
+      </div>
 
       <br />
       {/* Technology Section */}
       <div className="flex flex-col md:flex-row items-center">
-        <div className="w-32 h-32 bg-red-500 rounded-lg animate-bounce mr-6 mb-4 md:mb-0"></div>
+        <div className="w-32 h-32 bg-red-500 rounded-full animate-bounce mr-6 mb-4 md:mb-0"></div>
         <div>
           <h2 className="text-4xl font-bold mb-3">
             Technology: Innovations and Inventions
@@ -112,14 +111,17 @@ export default function Content() {
       {funFacts.Technology && (
         <div className="mt-8 bg-red-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-red-100">{funFacts.Technology}</p>
+          <p className="mb-4 text-red-100 text-center">{funFacts.Technology}</p>
         </div>
       )}
 
       <br />
       {/* Engineering Section */}
       <div className="flex flex-col md:flex-row items-center">
-        <div className="w-32 h-32 bg-green-500 rounded-lg animate-bounce mr-6 mb-4 md:mb-0"></div>
+        <div className="w-0 h-0 
+        border-l-[55px] border-l-transparent
+        border-b-[80px] border-b-green-500
+        border-r-[55px] border-r-transparent animate-bounce mr-11 mb-4 md:mb-0"></div>
         <div>
           <h2 className="text-4xl font-bold mb-3">
             Engineering: Building the Future
@@ -146,14 +148,14 @@ export default function Content() {
       {funFacts.Engineering && (
         <div className="mt-8 bg-green-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-green-100">{funFacts.Engineering}</p>
+          <p className="mb-4 text-green-100 text-center">{funFacts.Engineering}</p>
         </div>
       )}
 
       <br />
       {/* Math Section */}
       <div className="flex flex-col md:flex-row items-center">
-        <div className="w-32 h-32 bg-yellow-500 rounded-lg animate-bounce mr-6 mb-4 md:mb-0"></div>
+        <div className="w-32   h-32 bg-yellow-500 rounded-lg animate-bounce mr-6 mb-4 md:mb-0"></div>
         <div>
           <h2 className="text-4xl font-bold mb-3">
             Math: The Language of Logic
@@ -183,7 +185,7 @@ export default function Content() {
       {funFacts.Math && (
         <div className="mt-8 bg-yellow-700 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-yellow-100">{funFacts.Math}</p>
+          <p className="mb-4 text-yellow-100 text-center">{funFacts.Math}</p>
         </div>
       )}
     </div>

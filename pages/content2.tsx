@@ -3,7 +3,12 @@ import OpenAI from "openai";
 import { useState } from "react";
 
 export default function Content() {
-  const [funFact, setFunFact] = useState<string | null>(null);
+  const [funFacts, setFunFacts] = useState<{ [key: string]: string | null }>({
+    Science: null,
+    Technology: null,
+    Engineering: null,
+    Math: null,
+  });
 
   const openaikey = process.env.OPENAI_API_KEY;
   const openai = new OpenAI({
@@ -16,23 +21,28 @@ export default function Content() {
       const completion = openai.chat.completions.create({
         messages: [
           { role: "system", content: "You are a helpful assistant." },
-          { role: "user", content: `Generate a fun fact about ${topic} for 10 year olds.` },
+          { role: "user", content: `Generate a very unique and educational fun fact about ${topic} for children around the age of 10.` },
           { role: "assistant", content: "json" }, // Ensure the word 'json' is present
         ],
         model: "gpt-3.5-turbo-1106",
         response_format: { type: "json_object" },
       });
-  
+
       const response = await completion;
-  
+
       const generatedContent = response.choices[0]?.message?.content || null;
-  
+
       console.log(generatedContent);
-      setFunFact(generatedContent);
+
+      setFunFacts((prevFunFacts) => ({
+        ...prevFunFacts,
+        [topic]: generatedContent,
+      }));
     } catch (error) {
       console.error("Error generating fun fact:", error);
     }
   };
+
 
   return (
     <div className="bg-black text-white min-h-screen p-5">
@@ -54,22 +64,23 @@ export default function Content() {
             <li>Discover the wonders of the solar system.</li>
           </ul>
           <button
-            className="text-blue-400 hover:text-blue-300"
+            className="text-blue-400 hover:text-blue-200"
             onClick={() => handleExploreClick("Science")}
           >
-            Explore Science
+            Explore Science!
           </button>
         </div>
       </div>
 
       {/* Render Fun Fact */}
-      {funFact && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-3">Fun Fact</h2>
-          <p className="mb-4">{funFact}</p>
+      {funFacts.Science && (
+        <div className="mt-8 bg-blue-900 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
+          <p className="mb-4 text-blue-300">{funFacts.Science}</p>
         </div>
       )}
 
+        <br />
         {/* Technology Section */}
         <div className="flex flex-col md:flex-row items-center">
           <div className="w-32 h-32 bg-red-500 rounded-lg animate-bounce mr-6 mb-4 md:mb-0"></div>
@@ -87,23 +98,24 @@ export default function Content() {
               <li>Learn about internet safety and digital citizenship.</li>
             </ul>
             <button
-            className="text-blue-400 hover:text-red-300"
+            className="text-red-400 hover:text-red-200"
             onClick={() => handleExploreClick("Technology")}
           >
-            Explore Science
+            Explore Technology!
           </button>
           </div>
         </div>
 
         {/* Render Fun Fact */}
-      {funFact && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-3">Fun Fact</h2>
-          <p className="mb-4">{funFact}</p>
+      {funFacts.Technology && (
+        <div className="mt-8 bg-red-900 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
+          <p className="mb-4 text-red-100">{funFacts.Technology}</p>
         </div>
+        
       )}
 
-
+        <br />
         {/* Engineering Section */}
         <div className="flex flex-col md:flex-row items-center">
         <div className="w-32 h-32 bg-green-500 rounded-lg animate-bounce mr-6 mb-4 md:mb-0"></div>
@@ -121,21 +133,24 @@ export default function Content() {
               <li>Explore the world of robotics and automation.</li>
             </ul>
             <button
-            className="text-blue-400 hover:text-red-300"
+            className="text-green-400 hover:text-green-200"
             onClick={() => handleExploreClick("Engineering")}
           >
-            Explore Engineering
+            Explore Engineering!
           </button>
           </div>
         </div>
 
-        {funFact && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-3">Fun Fact</h2>
-          <p className="mb-4">{funFact}</p>
+        {/* Render Fun Fact */}
+      {funFacts.Engineering && (
+        <div className="mt-8 bg-green-900 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
+          <p className="mb-4 text-green-100">{funFacts.Engineering}</p>
         </div>
+        
       )}
 
+        <br />
         {/* Math Section */}
         <div className="flex flex-col md:flex-row items-center">
         <div className="w-32 h-32 bg-yellow-500 rounded-lg animate-bounce mr-6 mb-4 md:mb-0"></div>
@@ -158,19 +173,21 @@ export default function Content() {
               </li>
             </ul>
             <button
-            className="text-blue-400 hover:text-red-300"
+            className="text-yellow-400 hover:text-yellow-200"
             onClick={() => handleExploreClick("Math")}
           >
-            Explore Math
+            Explore Math!
           </button>
           </div>
         </div>
 
-        {funFact && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-3">Fun Fact</h2>
-          <p className="mb-4">{funFact}</p>
+        {/* Render Fun Fact */}
+      {funFacts.Math && (
+        <div className="mt-8 bg-yellow-700 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
+          <p className="mb-4 text-yellow-100">{funFacts.Math}</p>
         </div>
+        
       )}
       </div>
   );

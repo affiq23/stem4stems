@@ -105,7 +105,7 @@ export default function Form() {
   };
 
   return (
-    <main className="flex min-h-screen bg-black text-white">
+    <main className="flex min-h-screen bg-black text-white font-orbitron">
       <aside
         id="default-sidebar"
         className="w-60 bg-gray-800 p-5 ml-5 mt-5 mb-5 rounded-lg shadow-lg"

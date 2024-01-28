@@ -15,7 +15,6 @@ interface GeneratedContent {
 function RotatingImage({ texture }: any) {
   const mesh = useRef<THREE.Mesh | null>(null);
 
-  // Create a rotation animation for the image
   useFrame(() => {
     if (mesh.current) {
       mesh.current.rotation.y += 0.02;
@@ -39,7 +38,7 @@ export default function Form() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const textureLoader = new THREE.TextureLoader();
-      const loadedTexture = textureLoader.load("/stem_logo.png"); // Direct path
+      const loadedTexture = textureLoader.load("/stem_logo.png");
       setTexture(loadedTexture);
     }
   }, []);
@@ -185,10 +184,11 @@ export default function Form() {
           </ul>
         </div>
       </aside>
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <div className = "mt-28 dropdown" style={{ textAlign: "center",  marginLeft: "auto", marginRight: "auto" }}>
         <label htmlFor="selectSTEM">
           Select a topic:
           <select
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-4"
             name="selectSTEM"
             id="selectSTEM"
             onChange={handleTopicChange}
@@ -202,6 +202,9 @@ export default function Form() {
           </select>
         </label>
 
+
+
+
         <button
           onClick={handleGenerateAnswer}
           style={{ marginLeft: "10px", padding: "8px 16px" }}
@@ -212,9 +215,10 @@ export default function Form() {
         </button>
 
         {generatedContent && (
-          <div style={{ marginTop: "20px" }}>
+        
+          <div style={{ marginTop: "20px", textAlign: "center" }}>
             <p>{generatedContent.question}</p>
-            <form style={{ marginTop: "10px" }}>
+            <form className="max-w-sm mx-auto">
               {Object.entries(generatedContent.answers).map(
                 ([optionKey, optionText]) => (
                   <div key={optionKey}>

@@ -20,14 +20,12 @@ export default function Content() {
     try {
       const completion = openai.chat.completions.create({
         messages: [
-          { role: "system", content: "You are a helpful assistant." },
           {
             role: "user",
             content: `Generate a very unique and educational fun fact about a STEM topic like ${topic} for children around the age of 10. 
             Keep the output strictly just a response. For example, a sample response could be "Did you know that the first computer mouse was made of wood? It was invented by Doug Engelbart in 1964, and it was called a 'mouse' because of its tail-like cable. This early mouse had just one button and was used to control a computer screen. 
-            Today's computer mice are much more advanced and come in all shapes and sizes!" `,
+            Today's computer mice are much more advanced and come in all shapes and sizes!" The JSON should only have one key: fact `,
           },
-          { role: "assistant", content: "json" }, // Ensure the word 'json' is present
         ],
         model: "gpt-3.5-turbo-1106",
         response_format: { type: "json_object" },
@@ -80,7 +78,7 @@ export default function Content() {
       {funFacts.Science && (
         <div className="mt-8 ml-36 bg-blue-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-blue-300 text-center">{funFacts.Science}</p>
+          <p className="mb-4 text-blue-300 text-center">{JSON.parse(funFacts.Science).fact}</p>
         </div>
       )}
 
@@ -114,7 +112,7 @@ export default function Content() {
       {funFacts.Technology && (
         <div className="mt-8 ml-36 bg-red-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-red-100 text-center">{funFacts.Technology}</p>
+          <p className="mb-4 text-red-100 text-center">{JSON.parse(funFacts.Technology).fact}</p>
         </div>
       )}
 
@@ -151,7 +149,7 @@ export default function Content() {
       {funFacts.Engineering && (
         <div className="mt-8 ml-36 bg-green-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-green-100 text-center">{funFacts.Engineering}</p>
+          <p className="mb-4 text-green-100 text-center">{JSON.parse(funFacts.Engineering).fact}</p>
         </div>
       )}
 
@@ -188,7 +186,7 @@ export default function Content() {
       {funFacts.Math && (
         <div className="mt-8 ml-36 bg-yellow-900 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-3">Fun Fact!</h2>
-          <p className="mb-4 text-yellow-100 text-center">{funFacts.Math}</p>
+          <p className="mb-4 text-yellow-100 text-center">{JSON.parse(funFacts.Math).fact}</p>
         </div>
       )}
     </div>

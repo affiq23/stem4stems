@@ -5,18 +5,24 @@ dotenv.config();
 
 interface GeneratedContent {
   question: string;
-  options: { [key: string]: string };
-  correct_answer: string | null;
+  answers: { [key: string]: string };
+  correct_answer: string;
 }
 
 export default function Form() {
   const [selectedTopic, setSelectedTopic] = useState("");
+  const [userAnswer, setUserAnswer] = useState("");
   const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(
     null
   );
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
 
   const handleTopicChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedTopic(e.target.value);
+  };
+
+  const handleUserAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserAnswer(e.target.value.toUpperCase()); // Convert the answer to uppercase for case-insensitive comparison
   };
 
   const openaikey = process.env.OPENAI_API_KEY;
@@ -34,13 +40,8 @@ export default function Form() {
             content: `Generate a quiz question of a maximum of three sentences about ${selectedTopic} with 4 answer choices, including one correct answer. 
             An example would be:\n\nWhat is the primary function of mitochondria in a cell? 
             \n\nA) Synthesizing proteins\nB) Producing energy (ATP)\nC) Storing genetic information\nD) Facilitating cell division\n\n
-            The correct answer would be producing energy. 
-            Return all of this data in JSON format, but please make the target audience for 10-year-old kids. 
-            The JSON response should look like this: { "question": "THE QUESTION SHOULD BE HERE", "answer_choices": { "A": "SOME ANSWER", "B": "SOME ANSWER", "C": "SOME ANSWER", "D": "SOME ANSWER" }, "correct_answer": "SOME ANSWER" }`,
-          },
-          {
-            role: "user",
-            content: `Generate information about ${selectedTopic}.`,
+            The correct answer would be producing energy. Please include 4 options for the answer. 
+            Return all of this data in JSON format, but please make the target audience for 10-year-old kids. The JSON should have three keys: question, answers, correct_answer`,
           },
         ],
         model: "gpt-3.5-turbo-1106",
@@ -49,15 +50,21 @@ export default function Form() {
 
       const response = await completion;
 
-      // Log the JSON response to the console
-      console.log(response);
-
       const generatedContent =
         response.choices[0]?.message?.content || null;
 
       setGeneratedContent(JSON.parse(generatedContent as string) as GeneratedContent);
+      setIsAnswerCorrect(null); // Reset the answer correctness status
     } catch (error) {
       console.error("Error generating answer:", error);
+    }
+  };
+
+  const handleCheckAnswer = () => {
+    if (userAnswer === generatedContent?.correct_answer) {
+      setIsAnswerCorrect(true);
+    } else {
+      setIsAnswerCorrect(false);
     }
   };
 
@@ -88,22 +95,30 @@ export default function Form() {
 
       {generatedContent && (
         <div style={{ marginTop: "20px" }}>
-          <p>
-            <strong>Question:</strong> {generatedContent.question}
-          </p>
-          <ul>
-            {generatedContent.options &&
-              Object.entries(generatedContent.options).map(
-                ([optionKey, optionText]) => (
-                  <li key={optionKey}>
-                    {`${optionKey}: ${optionText}`}
-                  </li>
-                )
-              )}
-          </ul>
-          {generatedContent.correct_answer !== null && (
-            <p>
-              <strong>Correct Answer:</strong> {generatedContent.correct_answer}
+          <p>{generatedContent.question}</p>
+          <form>
+            {Object.entries(generatedContent.answers).map(
+              ([optionKey, optionText]) => (
+                <div key={optionKey}>
+                  <input
+                    type="radio"
+                    id={optionKey}
+                    name="userAnswer"
+                    value={optionKey}
+                    checked={userAnswer === optionKey}
+                    onChange={handleUserAnswerChange}
+                  />
+                  <label htmlFor={optionKey}>{`${optionKey}: ${optionText}`}</label>
+                </div>
+              )
+            )}
+          </form>
+          <button onClick={handleCheckAnswer} style={{ marginTop: "10px" }}>
+            Check Answer
+          </button>
+          {isAnswerCorrect !== null && (
+            <p style={{ marginTop: "10px" }}>
+              {isAnswerCorrect ? "Correct!" : "Incorrect. Try again!"}
             </p>
           )}
         </div>

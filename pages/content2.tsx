@@ -20,22 +20,22 @@ export default function Content() {
         dangerouslyAllowBrowser: true,
       });
 
-      const responses = await Promise.all(
-        prompts.map(async (prompt) => {
-          const completion = await openai.completions.create({
-            model: "gpt-3.5-turbo-1106",
-            messages: [
-              { role: "system", content: "You are a helpful assistant." },
-              { role: "user", content: prompt },
-            ],
-            max_tokens: 150,
-          });
+      // const responses = await Promise.all(
+      //   prompts.map(async (prompt) => {
+      //     const completion = await openai.completions.create({
+      //       model: "gpt-3.5-turbo-1106",
+      //       messages: [
+      //         { role: "system", content: "You are a helpful assistant." },
+      //         { role: "user", content: prompt },
+      //       ],
+      //       max_tokens: 150,
+      //     });
 
-          return completion.choices[0]?.text || "";
-        })
-      );
+      //     return completion.choices[0]?.text || "";
+      //   })
+      // );
 
-      return responses;
+      // return responses;
     } catch (error) {
       console.error("Error generating OpenAI responses:", error);
       throw error;
@@ -63,18 +63,18 @@ export default function Content() {
       // Add more prompts as needed
     ];
 
-    generateOpenAIResponses(sciencePrompts).then((responses) =>
-      setScienceResponses(responses)
-    );
-    generateOpenAIResponses(technologyPrompts).then((responses) =>
-      setTechnologyResponses(responses)
-    );
-    generateOpenAIResponses(engineeringPrompts).then((responses) =>
-      setEngineeringResponses(responses)
-    );
-    generateOpenAIResponses(mathPrompts).then((responses) =>
-      setMathResponses(responses)
-    );
+    // generateOpenAIResponses(sciencePrompts).then((responses) =>
+    //   setScienceResponses(responses)
+    // );
+    // generateOpenAIResponses(technologyPrompts).then((responses) =>
+    //   setTechnologyResponses(responses)
+    // );
+    // generateOpenAIResponses(engineeringPrompts).then((responses) =>
+    //   setEngineeringResponses(responses)
+    // );
+    // generateOpenAIResponses(mathPrompts).then((responses) =>
+    //   setMathResponses(responses)
+    // );
   }, []);
 
   return (
